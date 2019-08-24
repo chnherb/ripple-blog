@@ -1,60 +1,72 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <router-link to="/md">内容</router-link>
+    <router-link to="/mdedit">编辑</router-link>
+    <router-link to="/mavoneditor">mavon</router-link>
+    <router-link to="/mdList">list</router-link>
+    <div id="main">
+      <router-view></router-view>
+
+    </div>
+    <!--<button @click="test">button</button>-->
+    <!--<button @click="test2">button</button>-->
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  export default {
+    name: 'app',
+    components: {},
+    data() {
+      return {
+        msg: 'Welcome to Your Vue.js App',
+        mode: 3,
+        config: {
+          print: false, // 隐藏掉打印功能
+          exportmd: true,
+          importmd: true,
+        },
+        placeholderValue: "请输入问题描述",//placeholder的内容
+        initialValue: "",//，markdown默认值
+        theme: 'OneDark',//主题
+        content: "#hahah"
+      }
+    },
+    methods: {
+      saveMd() {
+        console.log(this.$refs.handleSave)
+        this.$refs.md.handleSave();
+
+      },
+      save(content) {
+        console.log("原始内容:" + content.value);
+        // console.log("转义后的内容:" + content.html);
+        // console.log("主题theme:" + content.theme);
+      },
+      onChange() {
+
+      },
+      changeImg() {
+
+
+      },
+      test() {
+        console.log("test")
+        this.$store.dispatch('getUserInfo');
+
+      },
+      test2() {
+        console.log("userInfo")
+        console.log(this.$store.state.userInfoData);
+      }
+    },
+
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  #main {
+    width: 90%;
+    height: 90%;
+  }
 </style>

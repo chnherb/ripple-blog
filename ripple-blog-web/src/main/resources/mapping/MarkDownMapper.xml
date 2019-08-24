@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangbo.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.huangbo.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="mis" jdbcType="VARCHAR" property="mis" />
+        <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="QQ" jdbcType="VARCHAR" property="QQ" />
+        <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+        <result column="website" jdbcType="VARCHAR" property="website" />
+    </resultMap>
+
+    <select id="findById" resultType="com.huangbo.entity.User">
+        select * from tbUser where mis = #{mis}
+    </select>
+
+</mapper>

@@ -4,9 +4,18 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    // path: path.resolve(__dirname, './dist'),
+    path: path.join(__dirname, "../ripple-blog-web/src/main/resources"),
+    // publicPath: '/dist/',
+    filename: 'index.js'
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true,
+    overlay: true,
+    contentBase: path.join(__dirname, "../ripple-blog-web/src/main/resources"),
+    compress: true,
+    port: 9000
   },
   module: {
     rules: [
@@ -32,6 +41,10 @@ module.exports = {
           'css-loader',
           'sass-loader?indentedSyntax'
         ],
+      },
+      {
+        test : /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader : "file-loader"
       },
       {
         test: /\.vue$/,
@@ -66,6 +79,10 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /.md$/,
+        loader: 'text-loader'
       }
     ]
   },
@@ -74,11 +91,6 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true
   },
   performance: {
     hints: false
