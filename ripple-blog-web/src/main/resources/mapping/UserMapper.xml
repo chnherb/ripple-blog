@@ -16,7 +16,7 @@
     </resultMap>
 
     <select id="findById" resultType="com.huangbo.entity.User">
-        select * from tbUser where mis = #{mis}
+        select * from tbuser where mis = #{mis}
     </select>
 
 </mapper>

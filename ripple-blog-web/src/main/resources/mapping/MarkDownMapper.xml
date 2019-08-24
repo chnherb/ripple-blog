@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huangbo.mapper.UserMapper">
+<mapper namespace="com.huangbo.mapper.MarkDownMapper">
 
-    <resultMap id="BaseResultMap" type="com.huangbo.entity.User">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="mis" jdbcType="VARCHAR" property="mis" />
-        <result column="pwd" jdbcType="VARCHAR" property="pwd" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <result column="age" jdbcType="INTEGER" property="age" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="phone" jdbcType="VARCHAR" property="phone" />
-        <result column="QQ" jdbcType="VARCHAR" property="QQ" />
-        <result column="wechat" jdbcType="VARCHAR" property="wechat" />
-        <result column="website" jdbcType="VARCHAR" property="website" />
+    <resultMap id="BaseResultMap" type="com.huangbo.entity.MarkDown">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
     </resultMap>
 
-    <select id="findById" resultType="com.huangbo.entity.User">
-        select * from tbUser where mis = #{mis}
+    <select id="findById" resultType="com.huangbo.entity.MarkDown">
+        select * from tbmarkdown where id = #{id}
     </select>
+
+    <select id="query" resultType="com.huangbo.entity.MarkDown">
+        select * from tbmarkdown limit #{skip}, #{limit}
+    </select>
+
+    <!--https://www.cnblogs.com/fsjohnhuang/p/4078659.html-->
+    <insert id="insertMarkDown" parameterType="com.huangbo.entity.MarkDown" useGeneratedKeys="true" keyProperty="id">
+      insert into tbmarkdown (title,content)
+      values (#{title},#{content})
+    </insert>
+
+    <update id="updateMarkDown" parameterType="com.huangbo.entity.MarkDown" useGeneratedKeys="true" keyProperty="id">
+        update tbmarkdown set title = #{title}, content=#{content}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteMarkDown" parameterType="int">
+        delete from tbMarkdown where id = #{id}
+    </delete>
+
+    <!--<update id="updateMarkDown" parameterType="com.huangbo.entity.MarkDown">-->
+        <!--update tbmarkdown set-->
+            <!--title = #{title},-->
+            <!--content = #{content}-->
+        <!--where id = #{id}-->
+    <!--</update>-->
+    <!--<delete id="deleteMarkDown" parameterType="int">-->
+       <!--delete from tbmarkdown where id = #{id}-->
+    <!--</delete>-->
 
 </mapper>
